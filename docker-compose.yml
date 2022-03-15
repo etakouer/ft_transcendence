@@ -2,13 +2,14 @@ version: "3"
 
 services:
   db:
-    image: postgres:14
+    build:
+      context: ${DB_DIR}
+    image: db
     container_name: db
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
-    entrypoint: ["bash", "-c", "echo '' >> /var/lib/postgresql/data/.keep && rm /var/lib/postgresql/data/.keep"]
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
